@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import singleSpaVue from 'single-spa-vue';
-
-import App from './App.vue';
+import Movies from './Movies.vue';
 
 Vue.config.productionTip = false;
 
@@ -9,7 +8,7 @@ const vueLifecycles = singleSpaVue({
   Vue,
   appOptions: {
     render(h) {
-      return h(App, {
+      return h(Movies, {
         props: {
           // single-spa props are available on the "this" object. Forward them to your component as needed.
           // https://single-spa.js.org/docs/building-applications#lifecyle-props
