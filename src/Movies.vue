@@ -209,11 +209,14 @@ export default {
 	},
 	created() {
 		const moviesStorage = JSON.parse(localStorage.getItem('movies'))
-		if(moviesStorage.length !== 0){
-			moviesStorage.forEach(movieStorage => {
+		moviesStorage.forEach(movieStorage => {
 				this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
 			})
-		}
+		// if(moviesStorage.length !== 0){
+		// 	moviesStorage.forEach(movieStorage => {
+		// 		this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
+		// 	})
+		// }
 	}
 }
 </script>
