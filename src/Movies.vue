@@ -196,9 +196,9 @@ export default {
 				this.movies[movieIndex].favourite = 0
 			}
 
-			// moviesStorage.sort((a, b) => {
-			// 	return a.id - b.id
-			// })
+			moviesStorage.sort((a, b) => {
+				return a.id - b.id
+			})
 			
 			localStorage.setItem('movies', JSON.stringify(moviesStorage))
 		}
@@ -209,14 +209,11 @@ export default {
 	},
 	created() {
 		const moviesStorage = JSON.parse(localStorage.getItem('movies'))
-		moviesStorage.forEach(movieStorage => {
+		if(moviesStorage.length !== 0){
+			moviesStorage.forEach(movieStorage => {
 				this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
 			})
-		// if(moviesStorage.length !== 0){
-		// 	moviesStorage.forEach(movieStorage => {
-		// 		this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
-		// 	})
-		// }
+		}
 	}
 }
 </script>
