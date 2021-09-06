@@ -196,9 +196,9 @@ export default {
 				this.movies[movieIndex].favourite = 0
 			}
 
-			moviesStorage.sort((a, b) => {
-				return a.id - b.id
-			})
+			// moviesStorage.sort((a, b) => {
+			// 	return a.id - b.id
+			// })
 			
 			localStorage.setItem('movies', JSON.stringify(moviesStorage))
 		}
