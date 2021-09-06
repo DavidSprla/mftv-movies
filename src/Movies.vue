@@ -209,7 +209,7 @@ export default {
 	},
 	created() {
 		const moviesStorage = JSON.parse(localStorage.getItem('movies'))
-		if(moviesStorage.length !== 0){
+		if(moviesStorage){
 			moviesStorage.forEach(movieStorage => {
 				this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
 			})
