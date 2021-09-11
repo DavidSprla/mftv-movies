@@ -7,7 +7,7 @@ script:
   - mkdir -p dist/@DavidSprla/movies/$TRAVIS_COMMIT
   - mkdir -p dist/@DavidSprla/movies/$TRAVIS_COMMIT/js
   - mv dist/*.* dist/@DavidSprla/movies/$TRAVIS_COMMIT/
-  - mv dist/js dist/@DavidSprla/movies/$TRAVIS_COMMIT/js/
+  - mv dist/js/*.* dist/@DavidSprla/movies/$TRAVIS_COMMIT/js/
 deploy:
   provider: s3
   access_key_id: "$AWS_ACCESS_KEY_ID"
