@@ -190,10 +190,10 @@ export default {
 
 			if (!moviesStorage.find(movieStorage => movieStorage.id === movie.id)) {
 				moviesStorage.push(movie)
-				this.movies[movieIndex].favourite = 1
+				this.movies[movieIndex].favourite = true
 			} else {
-				moviesStorage.splice(moviesStorage.indexOf(movie), 1)
-				this.movies[movieIndex].favourite = 0
+				moviesStorage.splice(moviesStorage.indexOf(moviesStorage.find(movieStorage => movieStorage.id === movie.id)), 1)
+				this.movies[movieIndex].favourite = false
 			}
 
 			moviesStorage.sort((a, b) => {
@@ -201,19 +201,29 @@ export default {
 			})
 			
 			localStorage.setItem('movies', JSON.stringify(moviesStorage))
+
+			const favouriteCustomEvent = new CustomEvent('favouriteEvent', {
+				detail: moviesStorage.length
+			})
+			window.dispatchEvent(favouriteCustomEvent)
+		},
+		handleInspect(event) {
+			this.inspect = event.detail 
 		}
 	},
-	beforeMount() {
-		const inspectStorage = JSON.parse(localStorage.getItem('inspect'))
+	mounted() {
+		window.addEventListener('inspectEvent', this.handleInspect)
+
+		const moviesStorage = JSON.parse(localStorage.getItem('movies')) || []
+		moviesStorage.forEach(movieStorage => {
+			this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
+		})
+
+		const inspectStorage = JSON.parse(localStorage.getItem('inspect')) || false
 		this.inspect = inspectStorage
 	},
-	created() {
-		const moviesStorage = JSON.parse(localStorage.getItem('movies'))
-		if(moviesStorage){
-			moviesStorage.forEach(movieStorage => {
-				this.movies[this.movies.findIndex(movieItem => movieItem.id === movieStorage.id)].favourite = 1
-			})
-		}
+	destroyed() {
+		window.removeEventListener('inspectEvent', this.handleInspect)
 	}
 }
 </script>
